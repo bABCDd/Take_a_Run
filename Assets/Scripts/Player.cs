@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     public float jumpforce = 4f;
     public float moveSpeed = 2f;
+    //체력 설정
     public int maxHealth = 9;
     public bool ishurt = false;
 
