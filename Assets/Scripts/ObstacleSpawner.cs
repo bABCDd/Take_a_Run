@@ -1,22 +1,30 @@
 using UnityEngine;
-using System.Collections; 
+using System.Collections;
 
 public class ObstacleSpawner : MonoBehaviour
 {
     [Header("Obstacle Prefabs")]
-    public GameObject[] obstaclePrefabs; 
+    // 위에서 생성되는 장애물 프리팹들 (슬라이드로 피함)
+    public GameObject[] topObstaclePrefabs;
+    // 아래서 생성되는 장애물 프리팹들 (점프로 피함)
+    public GameObject[] bottomObstaclePrefabs;
 
     [Header("Spawn Positions")]
     public float spawnXPosition = 12f; // 장애물이 생성될 X 좌표 (화면 우측 밖)
-    public float[] spawnYPositions = { -2f, 0f, 2f }; // 장애물이 나타날 수 있는 Y 좌표 목록 (바닥, 점프)
+
+    // 위에서 생성되는 장애물의 Y 좌표 (보통 플레이어 점프 최대 높이 근처)
+    public float[] topSpawnYPositions = { 2f }; // 예시: 플레이어가 슬라이드할 수 있는 높이
+    // 아래서 생성되는 장애물의 Y 좌표 (보통 플레이어 발 아래)
+    public float[] bottomSpawnYPositions = { -2f, -1.5f }; // 예시: 플레이어가 점프할 수 있는 높이
 
     private float _timer; // 다음 장애물 생성을 위한 타이머
-    private LevelManager _levelManager; 
+    private LevelManager _levelManager; // LevelManager 인스턴스 참조
 
     void Start()
     {
         _timer = 0f; // 타이머 초기화
- 
+
+        // LevelManager 인스턴스 가져오기
         _levelManager = LevelManager.Instance;
         if (_levelManager == null)
         {
@@ -26,6 +34,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     void Update()
     {
+        // LevelManager로부터 현재 계산된 스폰 간격을 가져옵니다.
         float currentSpawnInterval = (_levelManager != null) ? _levelManager.GetCurrentSpawnInterval() : 2f; // LevelManager가 없으면 기본값 사용
 
         _timer += Time.deltaTime;
@@ -36,33 +45,57 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 등록된 장애물 프리팹 중 하나를 무작위로 선택하여 생성합니다.
+    /// 이제 상단/하단 장애물을 구분하여 생성합니다.
+    /// </summary>
     void SpawnRandomObstacle()
     {
-        if (obstaclePrefabs == null || obstaclePrefabs.Length == 0)
+        // 상단/하단 장애물 중 어떤 것을 생성할지 무작위로 결정
+        bool spawnTopObstacle = Random.Range(0, 2) == 0; // 0이면 상단, 1이면 하단 (50% 확률)
+
+        GameObject selectedPrefab = null;
+        float randomY = 0f;
+
+        if (spawnTopObstacle)
         {
-            Debug.LogWarning("Obstacle Prefabs 배열이 할당되지 않았거나 비어있습니다. 장애물을 생성할 수 없습니다.");
-            return;
+            // 상단 장애물 생성 로직
+            if (topObstaclePrefabs == null || topObstaclePrefabs.Length == 0)
+            {
+                Debug.LogWarning("Top Obstacle Prefabs 배열이 비어있습니다. 상단 장애물을 생성할 수 없습니다.");
+                return;
+            }
+            selectedPrefab = topObstaclePrefabs[Random.Range(0, topObstaclePrefabs.Length)];
+            randomY = topSpawnYPositions[Random.Range(0, topSpawnYPositions.Length)];
+        }
+        else
+        {
+            // 하단 장애물 생성 로직
+            if (bottomObstaclePrefabs == null || bottomObstaclePrefabs.Length == 0)
+            {
+                Debug.LogWarning("Bottom Obstacle Prefabs 배열이 비어있습니다. 하단 장애물을 생성할 수 없습니다.");
+                return;
+            }
+            selectedPrefab = bottomObstaclePrefabs[Random.Range(0, bottomObstaclePrefabs.Length)];
+            randomY = bottomSpawnYPositions[Random.Range(0, bottomSpawnYPositions.Length)];
         }
 
-        // 1. 랜덤 장애물 프리팹 선택
-        GameObject selectedPrefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
-
-        // 2. 랜덤 Y 위치 선택
-        float randomY = spawnYPositions[Random.Range(0, spawnYPositions.Length)];
+        // 선택된 프리팹이 없다면 종료
+        if (selectedPrefab == null) return;
 
         // 3. 생성 위치 결정
         Vector3 spawnPosition = new Vector3(spawnXPosition, randomY, 0);
 
-        // 4. 장애물 생성 (오브젝트 풀링을 사용하면 Instantiate 대신 풀에서 가져옴)
+        // 4. 장애물 생성
         GameObject newObstacle = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
         // 5. 생성된 장애물의 ObstacleController 초기화
         ObstacleController obsController = newObstacle.GetComponent<ObstacleController>();
         if (obsController != null)
         {
-            
-            float currentObstacleSpeed = (_levelManager != null) ? _levelManager.GetCurrentGameSpeed() : 5f; // LevelManager가 없으면 기본값 사용
-            obsController.Init(currentObstacleSpeed); // 장애물 속도를 초기화하는 Init 함수 호출
+            // LevelManager로부터 현재 게임 속도를 가져와 ObstacleController에 전달
+            float currentObstacleSpeed = (_levelManager != null) ? _levelManager.GetCurrentGameSpeed() : 5f;
+            obsController.Init(currentObstacleSpeed); // 장애물 속도 초기화
         }
         else
         {
