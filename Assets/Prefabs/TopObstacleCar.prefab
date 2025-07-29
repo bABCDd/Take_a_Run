@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20441f15c2f8f8349846c95aedaf51bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 1
+  _livesToDecrease: 1
+  _despawnXPosition: -12
+  _impactEffectPrefab: {fileID: 4178861550450226732, guid: 705c358ffa1f61948887e33d7118089a, type: 3}
 --- !u!1 &8967883871583430707
 GameObject:
   m_ObjectHideFlags: 0

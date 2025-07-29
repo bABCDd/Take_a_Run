@@ -18,13 +18,12 @@ public class ObstacleSpawner : MonoBehaviour
     public float[] bottomSpawnYPositions = { -2f, -1.5f }; // 예시: 플레이어가 점프할 수 있는 높이
 
     private float _timer; // 다음 장애물 생성을 위한 타이머
-    private LevelManager _levelManager; // LevelManager 인스턴스 참조
+    private LevelManager _levelManager; 
 
     void Start()
     {
         _timer = 0f; // 타이머 초기화
 
-        // LevelManager 인스턴스 가져오기
         _levelManager = LevelManager.Instance;
         if (_levelManager == null)
         {
@@ -76,25 +75,25 @@ public class ObstacleSpawner : MonoBehaviour
                 Debug.LogWarning("Bottom Obstacle Prefabs 배열이 비어있습니다. 하단 장애물을 생성할 수 없습니다.");
                 return;
             }
-            selectedPrefab = bottomObstaclePrefabs[Random.Range(0, bottomObstaclePrefabs.Length)];
-            randomY = bottomSpawnYPositions[Random.Range(0, bottomSpawnYPositions.Length)];
+            selectedPrefab = bottomObstaclePrefabs[Random.Range(0, bottomObstaclePrefabs.Length)];//바텀옵스타클 프리팹에서 아무거나 뽑고 정의된
+            randomY = bottomSpawnYPositions[Random.Range(0, bottomSpawnYPositions.Length)]; //높이에서 스폰
         }
 
-        // 선택된 프리팹이 없다면 종료
+        // 선택된 프리팹이 없다면 종료 안전장치
         if (selectedPrefab == null) return;
 
-        // 3. 생성 위치 결정
+        // 생성 위치 결정
         Vector3 spawnPosition = new Vector3(spawnXPosition, randomY, 0);
 
-        // 4. 장애물 생성
+        // 장애물 생성
         GameObject newObstacle = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
-        // 5. 생성된 장애물의 ObstacleController 초기화
+        // 생성된 장애물의 ObstacleController 초기화
         ObstacleController obsController = newObstacle.GetComponent<ObstacleController>();
         if (obsController != null)
         {
             // LevelManager로부터 현재 게임 속도를 가져와 ObstacleController에 전달
-            float currentObstacleSpeed = (_levelManager != null) ? _levelManager.GetCurrentGameSpeed() : 5f;
+            float currentObstacleSpeed = (_levelManager != null) ? _levelManager.GetCurrentGameSpeed() : 5f; // 레벨 매니저가 없으면 기본 값 5f사용
             obsController.Init(currentObstacleSpeed); // 장애물 속도 초기화
         }
         else
