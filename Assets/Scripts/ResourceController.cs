@@ -15,8 +15,8 @@ public class ResourceController : MonoBehaviour
 
     public void ChangeLives(int amount)
     {
-        currentLives += amount;
-        currentLives = Mathf.Clamp(currentLives, 0, maxLives); 
+        currentLives += amount; // 음수면 라이프 감소 양수면 증가
+        currentLives = Mathf.Clamp(currentLives, 0, maxLives);  //라이프 0이상 9이하
 
         Debug.Log("목숨 변화: " + amount + ", 현재 목숨: " + currentLives);
 
