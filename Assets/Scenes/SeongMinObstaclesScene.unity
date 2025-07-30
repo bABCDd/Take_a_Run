@@ -155,7 +155,7 @@ MonoBehaviour:
   baseGameSpeed: 5
   maxGameSpeed: 15
   speedIncreaseRate: 0.05
-  baseSpawnInterval: 5
+  baseSpawnInterval: 2
   minSpawnInterval: 0.5
   intervalDecreaseRate: 0.05
   difficultyIncreaseStartTime: 30
