@@ -5,17 +5,17 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set; }
 
     [Header("Game Speed Control")]
-    [SerializeField] private float baseGameSpeed = 5f;          // 게임 시작 시 장애물 다가오는 속도/플레이어의 속도
-    [SerializeField] private float increasedGameSpeed = 8f;     // 난이도 상승 후 적용될 속도 (예: 30초 이후)
-
+    [SerializeField] private float baseGameSpeed = 5f;          // 게임 시작 시 기본 이동 속도
+    [SerializeField] private float maxGameSpeed = 15f;          // 도달 가능한 최대 이동 속도 
+    [SerializeField] private float speedIncreaseRate = 0.05f;   // 초당 속도 증가량 
 
     [Header("Obstacle Spawn Interval Control")]
     [SerializeField] private float baseSpawnInterval = 2f;      // 게임 시작 시 기본 장애물 스폰 간격
     [SerializeField] private float minSpawnInterval = 0.5f;     // 도달 가능한 최소 장애물 스폰 간격
-    [SerializeField] private float intervalDecreaseRate = 0.05f;// 초당 스폰 간격 감소량 
+    [SerializeField] private float intervalDecreaseRate = 0.05f;// 초당 스폰 간격 감소량
 
-    [Header("Difficulty Trigger Time")] 
-    [SerializeField] private float difficultyIncreaseTime = 30f; // 난이도(속도/간격)가 증가할 정확한 게임 시간 (예: 30초)
+    [Header("Difficulty Trigger Time")]
+    [SerializeField] private float difficultyIncreaseStartTime = 30f; // 난이도(속도/간격) 증가가 시작될 정확한 게임 시간
 
     private float _gameplayTime;
     private float _currentCalculatedGameSpeed;
@@ -36,26 +36,18 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         _gameplayTime = 0f;
-        _currentCalculatedGameSpeed = baseGameSpeed; // 시작은 기본 속도로
+        _currentCalculatedGameSpeed = baseGameSpeed;
         _currentCalculatedSpawnInterval = baseSpawnInterval;
     }
 
     void Update()
     {
         _gameplayTime += Time.deltaTime;
-
-        // 게임 속도 조절: difficultyIncreaseTime을 기준으로 속도를 변경
-        if (_gameplayTime >= difficultyIncreaseTime)
-        {
-            _currentCalculatedGameSpeed = increasedGameSpeed; // 특정 시간 이후 증가된 속도 적용
-        }
-        else
-        {
-            _currentCalculatedGameSpeed = baseGameSpeed; // 그 전까지는 기본 속도 유지
-        }
-
-        float timeForIntervalCalc = Mathf.Max(0, _gameplayTime - difficultyIncreaseTime); // 딜레이 후 시간 계산
-        _currentCalculatedSpawnInterval = Mathf.Max(minSpawnInterval, baseSpawnInterval - (timeForIntervalCalc * intervalDecreaseRate));
+      
+        float timeForDifficultyCalc = Mathf.Max(0, _gameplayTime - difficultyIncreaseStartTime);
+       
+        _currentCalculatedGameSpeed = Mathf.Min(maxGameSpeed, baseGameSpeed + (timeForDifficultyCalc * speedIncreaseRate));
+        _currentCalculatedSpawnInterval = Mathf.Max(minSpawnInterval, baseSpawnInterval - (timeForDifficultyCalc * intervalDecreaseRate));
     }
 
     public float GetCurrentGameSpeed()
