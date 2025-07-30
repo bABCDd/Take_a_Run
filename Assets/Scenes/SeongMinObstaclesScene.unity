@@ -153,11 +153,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseGameSpeed: 5
-  increasedGameSpeed: 8
-  baseSpawnInterval: 2
+  maxGameSpeed: 15
+  speedIncreaseRate: 0.05
+  baseSpawnInterval: 5
   minSpawnInterval: 0.5
   intervalDecreaseRate: 0.05
-  difficultyIncreaseTime: 30
+  difficultyIncreaseStartTime: 30
 --- !u!4 &964818139
 Transform:
   m_ObjectHideFlags: 0
