@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
@@ -104,6 +104,17 @@ public class Player : MonoBehaviour
         {
             Die();
         }
+        else if (collision.gameObject.CompareTag("HealItem"))
+        {
+            Heal(1);
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("TakeDamgeItem"))
+        {
+            TakeDamage(1);
+            Destroy(gameObject);
+        }
+
     }
 
     public void TakeDamage(int damage)
@@ -166,8 +177,9 @@ public class Player : MonoBehaviour
     public void Heal(int healing)
     {
         currentHealth += healing;
+        //초과 회복방지
         currentHealth = Mathf.Min(currentHealth, maxHealth);
         Debug.Log($"Healing now HP:{currentHealth}");
     }
-    
+
 }

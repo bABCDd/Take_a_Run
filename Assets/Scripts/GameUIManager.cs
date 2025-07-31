@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SocialPlatforms.Impl; 
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
@@ -11,6 +11,7 @@ public class GameUIManager : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text finalScoreText;
     public TMP_Text playTimeText;
+    public TMP_Text lifeCountText;
 
     public GameObject lifeIconPrefab;
     public Transform lifePanel;
@@ -22,12 +23,14 @@ public class GameUIManager : MonoBehaviour
 
     private List<GameObject> lifeIcons = new List<GameObject>();
     private bool isGameOver = false;
-    private float scoreTimer = 0f; // 점수 타이머
+    private float scoreTimer = 0f;
+
+
     public void Start()
     {
         UpdateScore(score);
         SetLife(life);
-        gameOverPanel.SetActive(false);
+        gameOverPanel?.SetActive(false);
     }
 
     void Update()
@@ -52,9 +55,11 @@ public class GameUIManager : MonoBehaviour
         UpdateScore(score);
     }
 
-    public void UpdateScore(int Score)
+    public void UpdateScore(int newScore)
     {
-        scoreText.text = $"SCORE : {score:D2}";
+        score = newScore;
+        if (scoreText != null)
+            scoreText.text = $"SCORE : {score:D2}";
     }
 
     public void TakeDamage(int amount)
@@ -81,23 +86,33 @@ public class GameUIManager : MonoBehaviour
             GameObject icon = Instantiate(lifeIconPrefab, lifePanel);
             lifeIcons.Add(icon);
         }
+
+        // 남은 수 표시
+        lifeCountText.text = $"× {newLife}";
     }
+
 
     void GameOver()
     {
         isGameOver = true;
 
-        // 결과창 띄우기
-        gameOverPanel.SetActive(true);
-        finalScoreText.text = $"최종 점수: {score}";
-        playTimeText.text = $"플레이 시간: {FormatTime(playTime)}";
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
 
-        Time.timeScale = 0f; // 게임 정지
+        if (finalScoreText != null)
+            finalScoreText.text = $"최종 점수: {score}";
+
+        if (playTimeText != null)
+            playTimeText.text = $"플레이 시간: {FormatTime(playTime)}";
+
+        Time.timeScale = 0f;
     }
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; // 멈췄던 시간 다시 진행
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

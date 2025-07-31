@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 484113261385253474}
   - component: {fileID: 2809573342829080624}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TopObstacleIce
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,9 +60,9 @@ GameObject:
   - component: {fileID: 3503806607060040304}
   - component: {fileID: 4783622122909313767}
   - component: {fileID: 8037061418764779068}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
