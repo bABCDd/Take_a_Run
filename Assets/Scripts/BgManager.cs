@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BgManager : MonoBehaviour
+public class BgManager : MonoBehaviour 
 {
     private LevelManager _levelManager;
 
@@ -32,7 +32,7 @@ public class BgManager : MonoBehaviour
         loopOffset = backgroundWidth * backgroundObjects.Length;
     }
 
-    void Update()
+    void Update() 
     {
         float currentScrollSpeed = 0f;
         if (_levelManager != null)

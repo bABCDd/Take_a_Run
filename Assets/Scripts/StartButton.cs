@@ -8,7 +8,6 @@ public class StartButton : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 0f;
         if (startButton != null)
         {
             startButton.SetActive(true);
@@ -17,12 +16,8 @@ public class StartButton : MonoBehaviour
 
     public void OnStartButtonClicked()
     {
-        Time.timeScale = 1f;
-        if (startButton != null)
-        {
-            startButton.SetActive(false);
-        }
+        //버튼을 클릭 시 메인 씬으로 전환
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
     }
-
-
 }
