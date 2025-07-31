@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4459064303854013073}
+  - component: {fileID: 7143532492691646148}
   m_Layer: 0
   m_Name: Chocolate
   m_TagString: TakeDamgeItem
@@ -32,6 +33,22 @@ Transform:
   - {fileID: 3745237868112578131}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7143532492691646148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434485632954148323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85cf0c47ba610344a6424a8b3716d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemType: 0
+  _effectAmount: 1
+  _despawnXPosition: -12
+  _collectEffectPrefab: {fileID: 0}
 --- !u!1 &8553166517302269353
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +164,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

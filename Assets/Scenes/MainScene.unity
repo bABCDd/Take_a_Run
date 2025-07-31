@@ -468,6 +468,8 @@ MonoBehaviour:
   - {fileID: 4145115149907587518, guid: e4e6270af5d213d49bed03bd03708b61, type: 3}
   deadzonePrefabs:
   - {fileID: 6620970820684611446, guid: ac7caab6d1cb6d242938f46c3beaefa7, type: 3}
+  itemPrefabs:
+  - {fileID: 7434485632954148323, guid: b5a680ae52a75ff4cbbf70824f1d3659, type: 3}
   spawnXPosition: 12
   topSpawnYPositions:
   - -2.5
@@ -478,6 +480,7 @@ MonoBehaviour:
   - -5
   topObstacleChance: 0.4
   bottomObstacleChance: 0.4
+  itemChance: 0.2
 --- !u!4 &930018112
 Transform:
   m_ObjectHideFlags: 0
