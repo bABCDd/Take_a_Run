@@ -6,18 +6,28 @@ public class Player : MonoBehaviour
 {
     Animator animator;
     Rigidbody2D _rigidbody;
+    BoxCollider2D _collider;
 
     public float jumpforce = 4f;
     public float moveSpeed = 2f;
+    //슬라이딩 지속 시간
+    public float slideTime = 1f;
     //체력 설정
     public int maxHealth = 9;
-    public bool ishurt = false;
+    private int currentHealth;
+
+    public bool isHurt = false;
 
     bool isJump = false;
+    bool isSliding = false;
 
     public bool godMode = false;
 
-    private int currentHealth;
+    Vector2 originalSize;
+    Vector2 originalOffset;
+    Vector2 slideSize = new Vector2(2f, 0.8f);
+    Vector2 slideOffset = new Vector2(0.05f, -0.35f);
+
 
     //피격 쿨타임 설정(초기 쿨타임을 위한 -999f
     private float hurtCooldown = 1.0f;
@@ -31,6 +41,12 @@ public class Player : MonoBehaviour
         //컴포넌트 가져옴
         animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<BoxCollider2D>();
+
+        originalSize = _collider.size;
+        originalOffset = _collider.offset;
+
+
 
         //컴포넌트를 찾지 못했다면 에러
         if (animator == null)
@@ -38,17 +54,25 @@ public class Player : MonoBehaviour
 
         if (_rigidbody == null)
             Debug.LogError("Not Founded Rigidbody");
+
+        if (_collider == null)
+            Debug.LogError("Not Founded Collider");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(ishurt)
+        if(isHurt)
             return;
         else
         {
             if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 isJump = true;
+        }
+
+        if(!isSliding && (Input.GetKeyDown(KeyCode.LeftShift)  || Input.GetMouseButtonDown(1)))
+        {
+            StartCoroutine(DoSlide());
         }
     }
 
@@ -89,7 +113,7 @@ public class Player : MonoBehaviour
 
         lastHurtTime = Time.time;
         currentHealth -= damage;
-        ishurt = true;
+        isHurt = true;
         animator.SetTrigger("Hurt");
 
         Debug.Log("HP:" + currentHealth);
@@ -98,6 +122,14 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.GameOver();
         }
+
+        
+    }
+
+    IEnumerator HurtCooldown()
+    {
+        yield return new WaitForSeconds(hurtCooldown);
+        isHurt = false;
     }
 
     void Die()
@@ -105,4 +137,30 @@ public class Player : MonoBehaviour
         Debug.Log("You Died");
         GameManager.Instance.GameOver();
     }
+
+    IEnumerator DoSlide()
+    {
+        isSliding = true;
+        animator.SetTrigger("Slide");
+
+        //콜라이더 크기 변경
+        _collider.size = slideSize;
+        _collider.offset = slideOffset;
+
+        yield return new WaitForSeconds(slideTime);
+
+        EndSlide();
+    }
+
+    void EndSlide()
+    {
+        isSliding = false;
+
+        //클라이더 복구
+        _collider.size = originalSize;
+        _collider.offset = originalOffset;
+
+    }
+
+    
 }
