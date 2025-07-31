@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
     {
         score += amount;
         uiManager.UpdateScore(score);
+        if (uiManager == null)
+            uiManager = FindObjectOfType<GameUIManager>();
     }
 
     public void TakeDamage(int amount)
