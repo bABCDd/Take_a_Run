@@ -170,6 +170,7 @@ public class Player : MonoBehaviour
     public void Heal(int healing)
     {
         currentHealth += healing;
+        //초과 회복방지
         currentHealth = Mathf.Min(currentHealth, maxHealth);
         Debug.Log($"Healing now HP:{currentHealth}");
     }
