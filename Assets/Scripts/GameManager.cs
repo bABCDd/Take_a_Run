@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+public enum GameState { Ready, Playing, GameOver }
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     private bool isGameOver = false;
+    public GameUIManager uiManager;
+    public GameState gameState = GameState.Ready;
+
+
+    private float playTime = 0f;
+    private int score = 0;
+    private int life = 9;
 
     private void Awake()
     {
@@ -22,7 +29,43 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    void Start()
+    {
+        gameState = GameState.Playing;
+        uiManager.UpdateScore(score);
+        uiManager.SetLife(life);
+    }
+    void Update()
+    {
+        if (gameState != GameState.Playing) return;
 
+        playTime += Time.deltaTime;
+
+        // 1초마다 점수 증가
+        if (Time.frameCount % 60 == 0) // 간단한 방법
+        {
+            AddScore(1);
+        }
+    }
+    public void AddScore(int amount)
+    {
+        score += amount;
+        uiManager.UpdateScore(score);
+    }
+
+    public void TakeDamage(int amount)
+    {
+        life -= amount;
+        uiManager.SetLife(life);
+
+        if (life <= 0)
+            GameOver();
+    }
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void GameOver()
     {
         if (isGameOver)
