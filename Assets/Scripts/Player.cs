@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         //컴포넌트 가져옴
         //에니메이터는 하위에 있는 오브젝트이기에 코드가 다름
-        animator = transform.Find("Model").GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
 
