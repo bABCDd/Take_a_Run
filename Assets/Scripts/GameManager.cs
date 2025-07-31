@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Game Over");
         //씬 전환을 3f만큼 지연시킴
-        Invoke("ReturnToStartScene", 3f);
+        Invoke("ReturnToStartScene", 1f);
     }
 
     void ReturnToStartScene()
