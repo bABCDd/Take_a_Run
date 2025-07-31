@@ -4,18 +4,14 @@ public class GroundManager : MonoBehaviour
 {
     private LevelManager _levelManager;
 
-    // 인스펙터에 할당할 땅 오브젝트들 (Ground_1, Ground_2)
     [SerializeField] private GameObject[] groundObjects;
 
-    // 각 땅 이미지의 실제 너비 (유니티 유닛 기준) - 여기서 13.5f로 맞춰야 합니다.
     [SerializeField] private float groundWidth = 13.5f;
 
-    // 땅이 화면 왼쪽 밖으로 얼마나 나가야 재배치될지 결정하는 X 좌표
-    // 카메라 왼쪽 끝보다 살짝 더 왼쪽으로 설정합니다.
+
     [SerializeField] private float resetXPosition = -15.64f;
 
-    // 재배치될 때 이동할 목표 X 좌표까지의 오프셋 (두 땅 조각의 총 너비)
-    // groundWidth * groundObjects.Length로 계산됩니다.
+
     private float loopOffset;
 
     void Awake()
@@ -32,8 +28,6 @@ public class GroundManager : MonoBehaviour
             enabled = false;
             return;
         }
-
-        // loopOffset을 동적으로 계산: 땅 오브젝트 전체의 너비 합
         loopOffset = groundWidth * groundObjects.Length;
     }
 
