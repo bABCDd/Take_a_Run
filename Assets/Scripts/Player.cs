@@ -166,6 +166,12 @@ public class Player : MonoBehaviour
         _collider.offset = originalOffset;
 
     }
-
+    
+    public void Heal(int healing)
+    {
+        currentHealth += healing;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        Debug.Log($"Healing now HP:{currentHealth}");
+    }
     
 }
