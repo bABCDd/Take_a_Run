@@ -16,7 +16,11 @@ public class FollowCamera : MonoBehaviour
     private void LateUpdate()
     {
         if (target == null)
+        {
+            Debug.LogError("Not Found target");
             return;
+        }
+            
 
         //목표 위치 계산
         Vector3 desiredPosition = target.position + offset;

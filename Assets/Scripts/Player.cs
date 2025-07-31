@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         //체력 초기화
         currentHealth = maxHealth;
         //컴포넌트 가져옴
-        animator = GetComponent<Animator>();
+        animator = transform.Find("Model").GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
 
@@ -62,6 +62,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("A");
+        }
         if(isHurt)
             return;
         else
@@ -120,7 +124,7 @@ public class Player : MonoBehaviour
         
         if (currentHealth <= 0)
         {
-            GameManager.Instance.GameOver();
+            GameManager.instance.GameOver();
         }
 
         
@@ -135,7 +139,7 @@ public class Player : MonoBehaviour
     void Die()
     {
         Debug.Log("You Died");
-        GameManager.Instance.GameOver();
+        GameManager.instance.GameOver();
     }
 
     IEnumerator DoSlide()
