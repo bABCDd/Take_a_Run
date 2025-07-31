@@ -40,12 +40,13 @@ public class ObstacleController : MonoBehaviour
             {
                 player.TakeDamage(_livesToDecrease);
 
-            if (_impactEffectPrefab != null)
-            {
-                GameObject effect = Instantiate(_impactEffectPrefab, transform.position, Quaternion.identity);
-                Destroy(effect, 1.5f);
+                if (_impactEffectPrefab != null)
+                {
+                    GameObject effect = Instantiate(_impactEffectPrefab, transform.position, Quaternion.identity);
+                    Destroy(effect, 1.5f);
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 }
