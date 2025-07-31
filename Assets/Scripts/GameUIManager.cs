@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -22,9 +23,9 @@ public class GameUIManager : MonoBehaviour
     private List<GameObject> lifeIcons = new List<GameObject>();
     private bool isGameOver = false;
     private float scoreTimer = 0f; // 점수 타이머
-    void Start()
+    public void Start()
     {
-        UpdateScoreUI();
+        UpdateScore(score);
         SetLife(life);
         gameOverPanel.SetActive(false);
     }
@@ -48,10 +49,10 @@ public class GameUIManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-        UpdateScoreUI();
+        UpdateScore(score);
     }
 
-    void UpdateScoreUI()
+    public void UpdateScore(int Score)
     {
         scoreText.text = $"SCORE : {score:D2}";
     }
@@ -67,7 +68,7 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    void SetLife(int newLife)
+    public void SetLife(int newLife)
     {
         // 기존 아이콘 제거
         foreach (var icon in lifeIcons)
