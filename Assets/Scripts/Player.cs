@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
             GameManager.instance.GameOver();
         }
 
-        
+        StartCoroutine(HurtCooldown());
     }
 
     IEnumerator HurtCooldown()
