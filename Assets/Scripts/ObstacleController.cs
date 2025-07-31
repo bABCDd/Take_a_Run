@@ -33,23 +33,18 @@ public class ObstacleController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // 충돌한 오브젝트가 "Player" 태그를 가졌는지 확인
         if (collision.CompareTag("Player"))
         {
-            ResourceController playerLives = collision.GetComponent<ResourceController>();
-            if (playerLives != null)
+            Player player = collision.GetComponent<Player>();
+            if (player != null)
             {
-                // 플레이어의 목숨 감소
-                playerLives.ChangeLives(-_livesToDecrease);
-            }
+                player.TakeDamage(_livesToDecrease);
 
             if (_impactEffectPrefab != null)
             {
                 GameObject effect = Instantiate(_impactEffectPrefab, transform.position, Quaternion.identity);
-
                 Destroy(effect, 1.5f);
             }
-
             Destroy(gameObject);
         }
     }
