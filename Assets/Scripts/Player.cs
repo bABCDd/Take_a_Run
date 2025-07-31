@@ -71,6 +71,38 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            TakeDamage(1);
+        }
+        else if (collision.gameObject.CompareTag("Deadzone"))
+        {
+            Die();
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        //아직 피격중이면 데미지를 받지않음
+        if (godMode || Time.time - lastHurtTime < hurtCooldown)
+            return;
+
+        lastHurtTime = Time.time;
+        currentHealth -= damage;
+        ishurt = true;
+        animator.SetBool("Ishurt", true);
+
+        Debug.Log("HP:" + currentHealth);
         
+        if (currentHealth <= 0)
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("You Died");
+        GameManager.Instance.GameOver();
     }
 }
