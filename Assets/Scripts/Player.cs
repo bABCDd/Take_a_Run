@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     BoxCollider2D _collider;
 
     public float jumpforce = 4f;
-    public float moveSpeed = 2f;
+    public float moveSpeed = 0f;
     //슬라이딩 지속 시간
     public float slideTime = 1f;
     //체력 설정
@@ -63,10 +63,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("A");
-        }
         if(isHurt)
             return;
         else
