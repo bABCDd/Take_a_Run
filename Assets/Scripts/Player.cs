@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         lastHurtTime = Time.time;
         currentHealth -= damage;
         ishurt = true;
-        animator.SetBool("Ishurt", true);
+        animator.SetTrigger("Hurt");
 
         Debug.Log("HP:" + currentHealth);
         
