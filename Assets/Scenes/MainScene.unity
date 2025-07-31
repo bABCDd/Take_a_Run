@@ -385,12 +385,18 @@ MonoBehaviour:
   bottomObstaclePrefabs:
   - {fileID: 3439886972594228010, guid: b9e44da0181048d4eb3ea359a20d2a01, type: 3}
   - {fileID: 4145115149907587518, guid: e4e6270af5d213d49bed03bd03708b61, type: 3}
+  deadzonePrefabs:
+  - {fileID: 6620970820684611446, guid: ac7caab6d1cb6d242938f46c3beaefa7, type: 3}
   spawnXPosition: 12
   topSpawnYPositions:
   - 2
   bottomSpawnYPositions:
   - -2
   - -1.5
+  deadzoneYPositions:
+  - -3.5
+  topObstacleChance: 0.4
+  bottomObstacleChance: 0.4
 --- !u!4 &930018112
 Transform:
   m_ObjectHideFlags: 0

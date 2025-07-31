@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7296460969609365483}
   - component: {fileID: 8781761459404067329}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BottomObstacleDog
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 7974009990325943760}
   - component: {fileID: 9058912699857330848}
   - component: {fileID: 1348489790051735146}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
