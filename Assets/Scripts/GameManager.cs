@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             uiManager = FindObjectOfType<GameUIManager>();
             if (uiManager == null)
             {
-                Debug.LogError("GameUIManager�� ���� �����ϴ�!");
+                Debug.LogError("Not founded GameUIManager");
                 yield break;
             }
         }
