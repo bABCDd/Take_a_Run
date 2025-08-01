@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator Start()
     {
-        // GameUIManager°¡ »ı¼ºµÇ±â¸¦ ±â´Ù¸² (ÇÁ·¹ÀÓ ³¡±îÁö ´ë±â)
+        // GameUIManagerê°€ ìƒì„±ë˜ê¸°ë¥¼ ê¸°ë‹¤ë¦¼ (í”„ë ˆì„ ëê¹Œì§€ ëŒ€ê¸°)
         yield return new WaitForEndOfFrame();
 
         if (uiManager == null)
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             uiManager = FindObjectOfType<GameUIManager>();
             if (uiManager == null)
             {
-                Debug.LogError("GameUIManager°¡ ¾À¿¡ ¾ø½À´Ï´Ù!");
+                Debug.LogError("GameUIManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
                 yield break;
             }
         }
