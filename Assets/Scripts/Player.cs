@@ -197,6 +197,7 @@ public class Player : MonoBehaviour
         //초과 회복방지
         currentHealth = Mathf.Min(currentHealth, maxHealth);
         Debug.Log($"Healing now HP:{currentHealth}");
+        GameManager.instance.uiManager.UpdateLifeDisplay(currentHealth);
     }
 
     public int CurrentHealth => currentHealth;
