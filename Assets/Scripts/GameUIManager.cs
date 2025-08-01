@@ -25,9 +25,17 @@ public class GameUIManager : MonoBehaviour
     private bool isGameOver = false;
     private float scoreTimer = 0f;
 
-
+    private void Awake()
+    {
+        if (GameManager.instance != null)
+            GameManager.instance.uiManager = this;
+    }
     public void Start()
     {
+        if (scoreText == null) Debug.LogWarning("ScoreText가 연결되지 않았습니다.");
+        if (lifeIconPrefab == null) Debug.LogWarning("lifeIconPrefab이 연결되지 않았습니다.");
+        if (lifePanel == null) Debug.LogWarning("lifePanel이 연결되지 않았습니다.");
+
         UpdateScore(score);
         SetLife(life);
         gameOverPanel?.SetActive(false);
@@ -88,11 +96,12 @@ public class GameUIManager : MonoBehaviour
         }
 
         // 남은 수 표시
-        lifeCountText.text = $"× {newLife}";
+        if (lifeCountText != null)
+            lifeCountText.text = $"× {newLife}";
     }
 
 
-    void GameOver()
+        void GameOver()
     {
         isGameOver = true;
 
@@ -108,6 +117,9 @@ public class GameUIManager : MonoBehaviour
             playTimeText.text = $"플레이 시간: {FormatTime(playTime)}";
 
         Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
     }
 
     public void RestartGame()
@@ -121,5 +133,10 @@ public class GameUIManager : MonoBehaviour
         int min = (int)(seconds / 60);
         int sec = (int)(seconds % 60);
         return $"{min:D2}:{sec:D2}";
+    }
+    private void OnEnable()
+    {
+        if (GameManager.instance != null)
+            GameManager.instance.uiManager = this;
     }
 }

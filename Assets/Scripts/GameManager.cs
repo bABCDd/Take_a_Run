@@ -28,12 +28,28 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
-    void Start()
+    IEnumerator Start()
     {
+        // GameUIManager가 생성되기를 기다림 (프레임 끝까지 대기)
+        yield return new WaitForEndOfFrame();
+
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<GameUIManager>();
+            if (uiManager == null)
+            {
+                Debug.LogError("GameUIManager가 씬에 없습니다!");
+                yield break;
+            }
+        }
+
         gameState = GameState.Playing;
         uiManager.UpdateScore(score);
         uiManager.SetLife(life);
+    
+   
     }
     void Update()
     {
@@ -50,15 +66,24 @@ public class GameManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-        uiManager.UpdateScore(score);
+      
         if (uiManager == null)
             uiManager = FindObjectOfType<GameUIManager>();
+
+        if (uiManager != null)
+            uiManager.UpdateScore(score);
     }
 
     public void TakeDamage(int amount)
-    {
+    {   
         life -= amount;
-        uiManager.SetLife(life);
+        if (uiManager == null)
+            uiManager = FindObjectOfType<GameUIManager>();
+
+        if (uiManager != null)
+            uiManager.SetLife(life);
+
+
 
         if (life <= 0)
             GameOver();
