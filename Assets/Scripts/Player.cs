@@ -198,4 +198,7 @@ public class Player : MonoBehaviour
         Debug.Log($"Healing now HP:{currentHealth}");
     }
 
+    public int CurrentHealth => currentHealth;
+    public int MaxHealth => maxHealth;
+
 }
