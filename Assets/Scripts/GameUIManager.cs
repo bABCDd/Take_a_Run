@@ -152,4 +152,35 @@ public class GameUIManager : MonoBehaviour
         if (GameManager.instance != null)
             GameManager.instance.uiManager = this;
     }
+    public void UpdateLifeDisplay(int newLife)
+    {
+        // 현재 아이콘 개수와 비교
+        int currentIconCount = lifeIcons.Count;
+
+        // 필요 없는 아이콘 제거
+        if (newLife < currentIconCount)
+        {
+            int diff = currentIconCount - newLife;
+            for (int i = 0; i < diff; i++)
+            {
+                GameObject iconToRemove = lifeIcons[lifeIcons.Count - 1];
+                lifeIcons.RemoveAt(lifeIcons.Count - 1);
+                Destroy(iconToRemove);
+            }
+        }
+        // 부족하면 추가 (체력 회복)
+        else if (newLife > currentIconCount)
+        {
+            int diff = newLife - currentIconCount;
+            for (int i = 0; i < diff; i++)
+            {
+                GameObject icon = Instantiate(lifeIconPrefab, lifePanel);
+                lifeIcons.Add(icon);
+            }
+        }
+
+        // 텍스트 갱신
+        lifeCountText.text = $"× {newLife}";
+    }
+
 }

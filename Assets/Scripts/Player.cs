@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
         originalSize = _collider.size;
         originalOffset = _collider.offset;
-
+        GameManager.instance.uiManager.UpdateLifeDisplay(currentHealth);
 
 
         //컴포넌트를 찾지 못했다면 에러
@@ -150,8 +150,11 @@ public class Player : MonoBehaviour
         {
             GameManager.instance.GameOver();
         }
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         StartCoroutine(HurtCooldown());
+        GameManager.instance.uiManager.UpdateLifeDisplay(currentHealth);
+
     }
 
     IEnumerator HurtCooldown()
@@ -196,6 +199,10 @@ public class Player : MonoBehaviour
         //초과 회복방지
         currentHealth = Mathf.Min(currentHealth, maxHealth);
         Debug.Log($"Healing now HP:{currentHealth}");
+        GameManager.instance.uiManager.UpdateLifeDisplay(currentHealth);
     }
+
+    public int CurrentHealth => currentHealth;
+    public int MaxHealth => maxHealth;
 
 }

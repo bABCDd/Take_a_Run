@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 public enum GameState { Ready, Playing, GameOver }
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class GameManager : MonoBehaviour
     private float playTime = 0f;
     private int score = 0;
     private int life = 9;
+    public GameObject gameOverPanel;
+    public Text scoreText;
+    public Text timeText;
 
     private void Awake()
     {
@@ -22,11 +27,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            
         }
 
     }
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
             uiManager = FindObjectOfType<GameUIManager>();
             if (uiManager == null)
             {
-                Debug.LogError("GameUIManager가 씬에 없습니다!");
+                Debug.LogError("Not founded GameUIManager");
                 yield break;
             }
         }
@@ -101,8 +102,26 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
 
         Debug.Log("Game Over");
-        //씬 전환을 3f만큼 지연시킴
-        Invoke("ReturnToStartScene", 1f);
+        gameState = GameState.GameOver;
+        gameOverPanel.SetActive(true);
+        
+        //씬 전환을 5f만큼 지연시킴
+        Invoke("ReturnToStartScene", 5f);
+    }
+    public void ShowGameOverUI(int score, float playTime)
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        if (scoreText != null)
+            scoreText.text = $"Score: {score}";
+
+        if (timeText != null)
+        {
+            int minutes = Mathf.FloorToInt(playTime / 60f);
+            int seconds = Mathf.FloorToInt(playTime % 60f);
+            timeText.text = $"Time: {minutes:00}:{seconds:00}";
+        }
     }
 
     void ReturnToStartScene()
