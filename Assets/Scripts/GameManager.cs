@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,15 +18,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        //½Ì±ÛÅæ
+        //ì‹±ê¸€í†¤
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            
         }
 
     }
@@ -57,8 +53,8 @@ public class GameManager : MonoBehaviour
 
         playTime += Time.deltaTime;
 
-        // 1ÃÊ¸¶´Ù Á¡¼ö Áõ°¡
-        if (Time.frameCount % 60 == 0) // °£´ÜÇÑ ¹æ¹ı
+        // 1ì´ˆë§ˆë‹¤ ì ìˆ˜ ì¦ê°€
+        if (Time.frameCount % 60 == 0) // ê°„ë‹¨í•œ ë°©ë²•
         {
             AddScore(1);
         }
@@ -101,7 +97,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
 
         Debug.Log("Game Over");
-        //¾À ÀüÈ¯À» 3f¸¸Å­ Áö¿¬½ÃÅ´
+        //ì”¬ ì „í™˜ì„ 3fë§Œí¼ ì§€ì—°ì‹œí‚´
         Invoke("ReturnToStartScene", 1f);
     }
 
