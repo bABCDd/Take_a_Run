@@ -111,12 +111,12 @@ public class Player : MonoBehaviour
         else if (collision.gameObject.CompareTag("HealItem"))
         {
             Heal(1);
-            Destroy(gameObject);
+            Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("TakeDamgeItem"))
         {
             TakeDamage(1);
-            Destroy(gameObject);
+            Destroy(collision.gameObject);
         }
 
     }

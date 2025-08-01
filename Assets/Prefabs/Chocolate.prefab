@@ -48,7 +48,6 @@ MonoBehaviour:
   _itemType: 0
   _effectAmount: 1
   _despawnXPosition: -12
-  _collectEffectPrefab: {fileID: 0}
 --- !u!1 &8553166517302269353
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +62,7 @@ GameObject:
   - component: {fileID: 1997485293143903460}
   m_Layer: 0
   m_Name: BadItem3
-  m_TagString: Untagged
+  m_TagString: TakeDamgeItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

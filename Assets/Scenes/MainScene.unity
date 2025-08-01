@@ -470,6 +470,11 @@ MonoBehaviour:
   - {fileID: 6620970820684611446, guid: ac7caab6d1cb6d242938f46c3beaefa7, type: 3}
   itemPrefabs:
   - {fileID: 7434485632954148323, guid: b5a680ae52a75ff4cbbf70824f1d3659, type: 3}
+  - {fileID: 1032108409199856821, guid: a69eb9adfa17cbb4096a86c5ce8050d4, type: 3}
+  - {fileID: 8882016841778226785, guid: b679f41221f45c64db1acf90ab34503e, type: 3}
+  - {fileID: 4143085058835776166, guid: 652dd688ab0eae44e837c0fba1b2713e, type: 3}
+  - {fileID: 915793031315615168, guid: 74a2826ebd9281747bc514f3c7778ca0, type: 3}
+  - {fileID: 1067109568118134212, guid: 72a214d8ac80aba40a1d765591c083af, type: 3}
   spawnXPosition: 12
   topSpawnYPositions:
   - -2.5
