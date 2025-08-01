@@ -83,25 +83,38 @@ public class GameUIManager : MonoBehaviour
 
     public void SetLife(int newLife)
     {
-        // 기존 아이콘 제거
-        foreach (var icon in lifeIcons)
-            Destroy(icon);
-        lifeIcons.Clear();
+        int currentIconCount = lifeIcons.Count;
 
-        // 새 아이콘 생성
-        for (int i = 0; i < newLife; i++)
+        // 필요 없는 아이콘 제거
+        if (newLife < currentIconCount)
         {
-            GameObject icon = Instantiate(lifeIconPrefab, lifePanel);
-            lifeIcons.Add(icon);
+            int diff = currentIconCount - newLife;
+            for (int i = 0; i < diff; i++)
+            {
+                // 오른쪽 끝에서 제거
+                GameObject iconToRemove = lifeIcons[lifeIcons.Count - 1];
+                lifeIcons.RemoveAt(lifeIcons.Count - 1);
+                Destroy(iconToRemove);
+            }
+        }
+        // 부족하면 추가 (회복 시스템 쓸 경우)
+        else if (newLife > currentIconCount)
+        {
+            int diff = newLife - currentIconCount;
+            for (int i = 0; i < diff; i++)
+            {
+                GameObject icon = Instantiate(lifeIconPrefab, lifePanel);
+                lifeIcons.Add(icon);
+            }
         }
 
-        // 남은 수 표시
-        if (lifeCountText != null)
-            lifeCountText.text = $"× {newLife}";
+        // 텍스트도 갱신
+        lifeCountText.text = $"× {newLife}";
+        Debug.Log($"LifeIcons count: {lifeIcons.Count}");
     }
 
 
-        void GameOver()
+    void GameOver()
     {
         isGameOver = true;
 
