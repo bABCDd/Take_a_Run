@@ -10,9 +10,6 @@ public class ObstacleController : MonoBehaviour
 
     private float _currentMoveSpeed; // LevelManager로부터 받아올 현재 이동 속도
 
-    [Header("Effects")]
-    [SerializeField] private GameObject _impactEffectPrefab;
-
     void Update()
     {
         // 장애물 왼쪽으로 이동
@@ -40,11 +37,6 @@ public class ObstacleController : MonoBehaviour
             {
                 player.TakeDamage(_livesToDecrease);
 
-                if (_impactEffectPrefab != null)
-                {
-                    GameObject effect = Instantiate(_impactEffectPrefab, transform.position, Quaternion.identity);
-                    Destroy(effect, 1.5f);
-                }
                 Destroy(gameObject);
             }
         }
