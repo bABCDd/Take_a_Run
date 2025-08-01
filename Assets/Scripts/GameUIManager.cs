@@ -24,6 +24,8 @@ public class GameUIManager : MonoBehaviour
     private List<GameObject> lifeIcons = new List<GameObject>();
     private bool isGameOver = false;
     private float scoreTimer = 0f;
+    private Player player;
+
 
     private void Awake()
     {
@@ -39,6 +41,9 @@ public class GameUIManager : MonoBehaviour
         UpdateScore(score);
         SetLife(life);
         gameOverPanel?.SetActive(false);
+        player = FindObjectOfType<Player>();
+        if (player == null)
+            Debug.LogError("Player를 찾을 수 없습니다!");
     }
 
     void Update()
@@ -151,5 +156,35 @@ public class GameUIManager : MonoBehaviour
     {
         if (GameManager.instance != null)
             GameManager.instance.uiManager = this;
+    }
+    public void UpdateLifeDisplay(int newLife)
+    {
+        // 현재 아이콘 개수와 비교
+        int currentIconCount = lifeIcons.Count;
+
+        // 필요 없는 아이콘 제거
+        if (newLife < currentIconCount)
+        {
+            int diff = currentIconCount - newLife;
+            for (int i = 0; i < diff; i++)
+            {
+                GameObject iconToRemove = lifeIcons[lifeIcons.Count - 1];
+                lifeIcons.RemoveAt(lifeIcons.Count - 1);
+                Destroy(iconToRemove);
+            }
+        }
+        // 부족하면 추가 (체력 회복)
+        else if (newLife > currentIconCount)
+        {
+            int diff = newLife - currentIconCount;
+            for (int i = 0; i < diff; i++)
+            {
+                GameObject icon = Instantiate(lifeIconPrefab, lifePanel);
+                lifeIcons.Add(icon);
+            }
+        }
+
+        // 텍스트 갱신
+        lifeCountText.text = $"× {newLife}";
     }
 }

@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
         originalSize = _collider.size;
         originalOffset = _collider.offset;
-
+        GameManager.instance.uiManager.UpdateLifeDisplay(currentHealth);
 
 
         //컴포넌트를 찾지 못했다면 에러
@@ -152,6 +152,7 @@ public class Player : MonoBehaviour
         }
 
         StartCoroutine(HurtCooldown());
+        GameManager.instance.uiManager.UpdateLifeDisplay(currentHealth);
     }
 
     IEnumerator HurtCooldown()
