@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 
     bool isJump = false;
     bool isSliding = false;
+    private bool isGrounded = false;
 
     public bool godMode = false;
 
@@ -67,8 +68,11 @@ public class Player : MonoBehaviour
             return;
         else
         {
-            if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                isJump = true;
+            if (isGrounded)
+            {
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                    isJump = true;
+            }
         }
 
         if(!isSliding && (Input.GetKeyDown(KeyCode.LeftShift)  || Input.GetMouseButtonDown(1)))
@@ -115,6 +119,18 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            isGrounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            isGrounded = false;
     }
 
     public void TakeDamage(int damage)

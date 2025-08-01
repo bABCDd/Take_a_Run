@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - HealItem
   - TakeDamgeItem
+  - Ground
   layers:
   - Default
   - TransparentFX
