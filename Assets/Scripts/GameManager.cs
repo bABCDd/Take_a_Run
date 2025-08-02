@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 public enum GameState { Ready, Playing, GameOver }
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class GameManager : MonoBehaviour
     private float playTime = 0f;
     private int score = 0;
     private int life = 9;
+    public GameObject gameOverPanel;
+    public Text scoreText;
+    public Text timeText;
 
     private void Awake()
     {
@@ -22,7 +27,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            
+
         }
 
     }
@@ -44,8 +49,8 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Playing;
         uiManager.UpdateScore(score);
         uiManager.SetLife(life);
-    
-   
+
+
     }
     void Update()
     {
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-      
+
         if (uiManager == null)
             uiManager = FindObjectOfType<GameUIManager>();
 
@@ -71,7 +76,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void TakeDamage(int amount)
-    {   
+    {
         life -= amount;
         if (uiManager == null)
             uiManager = FindObjectOfType<GameUIManager>();
@@ -97,8 +102,29 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
 
         Debug.Log("Game Over");
-        //씬 전환을 3f만큼 지연시킴
-        Invoke("ReturnToStartScene", 1f);
+        gameState = GameState.GameOver;
+        gameOverPanel.SetActive(true);
+        if (uiManager != null)
+        {
+            uiManager.ShowGameOverUI(score, playTime);
+        }
+        //씬 전환을 5f만큼 지연시킴
+        Invoke("ReturnToStartScene", 5f);
+    }
+    public void ShowGameOverUI(int score, float playTime)
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        if (scoreText != null)
+            scoreText.text = $"Score: {score}";
+
+        if (timeText != null)
+        {
+            int minutes = Mathf.FloorToInt(playTime / 60f);
+            int seconds = Mathf.FloorToInt(playTime % 60f);
+            timeText.text = $"Time: {minutes:00}:{seconds:00}";
+        }
     }
 
     void ReturnToStartScene()

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl; 
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
@@ -16,6 +16,9 @@ public class GameUIManager : MonoBehaviour
     public GameObject lifeIconPrefab;
     public Transform lifePanel;
     public GameObject gameOverPanel;
+    public GameObject gameOverCanvas; // 유니티에서 할당
+    public TextMeshProUGUI gameOverText; // 점수, 시간 등 출력용 텍스트
+
 
     private int score = 0;
     private int life = 9;
@@ -139,6 +142,18 @@ public class GameUIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
 
     }
+    public void ShowGameOverUI(int finalScore, float finalPlayTime)
+    {
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(true);
+        }
+
+        if (gameOverText != null)
+        {
+            gameOverText.text = $"점수: {finalScore}\n생존 시간: {finalPlayTime:F1}초";
+        }
+    }
 
     public void RestartGame()
     {
@@ -159,7 +174,6 @@ public class GameUIManager : MonoBehaviour
     }
     public void UpdateLifeDisplay(int newLife)
     {
-        // 현재 아이콘 개수와 비교
         int currentIconCount = lifeIcons.Count;
 
         // 필요 없는 아이콘 제거
@@ -168,9 +182,12 @@ public class GameUIManager : MonoBehaviour
             int diff = currentIconCount - newLife;
             for (int i = 0; i < diff; i++)
             {
-                GameObject iconToRemove = lifeIcons[lifeIcons.Count - 1];
-                lifeIcons.RemoveAt(lifeIcons.Count - 1);
-                Destroy(iconToRemove);
+                if (lifeIcons.Count > 0)
+                {
+                    GameObject iconToRemove = lifeIcons[lifeIcons.Count - 1];
+                    lifeIcons.RemoveAt(lifeIcons.Count - 1);
+                    Destroy(iconToRemove);
+                }
             }
         }
         // 부족하면 추가 (체력 회복)
@@ -186,5 +203,7 @@ public class GameUIManager : MonoBehaviour
 
         // 텍스트 갱신
         lifeCountText.text = $"× {newLife}";
+        Debug.Log($"[UI] 하트 표시 갱신됨: 현재 아이콘 수 = {lifeIcons.Count}");
     }
+
 }
