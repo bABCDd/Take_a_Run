@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
             Heal(1);
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("TakeDamageItem"))
+        else if (collision.gameObject.CompareTag("TakeDamgeItem"))
         {
             TakeDamage(1);
             Destroy(collision.gameObject);

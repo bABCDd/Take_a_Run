@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 1466942157380642713}
   m_Layer: 0
   m_Name: Antifreeze
-  m_TagString: TakeDamageItem
+  m_TagString: TakeDamgeItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
