@@ -18,8 +18,7 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private int life = 9;
     public GameObject gameOverPanel;
-    public Text scoreText;
-    public Text timeText;
+   
 
     private void Awake()
     {
@@ -116,15 +115,7 @@ public class GameManager : MonoBehaviour
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
 
-        if (scoreText != null)
-            scoreText.text = $"Score: {score}";
-
-        if (timeText != null)
-        {
-            int minutes = Mathf.FloorToInt(playTime / 60f);
-            int seconds = Mathf.FloorToInt(playTime % 60f);
-            timeText.text = $"Time: {minutes:00}:{seconds:00}";
-        }
+        
     }
 
     void ReturnToStartScene()

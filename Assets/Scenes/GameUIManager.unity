@@ -379,11 +379,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6317390563165362276, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
+--- !u!1 &3550963320680039510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1637100655549789684, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
+  m_PrefabInstance: {fileID: 3550963320680039509}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3550963320680039511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1582623430326935741, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
+  m_PrefabInstance: {fileID: 3550963320680039509}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4961342375416717330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -508,6 +522,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2575963719848148441, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
+      propertyPath: gameOverPanel
+      value: 
+      objectReference: {fileID: 3550963320680039511}
+    - target: {fileID: 2575963719848148441, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
+      propertyPath: gameOverCanvas
+      value: 
+      objectReference: {fileID: 3550963320680039510}
     - target: {fileID: 6261137693827224889, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

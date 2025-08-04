@@ -16,8 +16,8 @@ public class GameUIManager : MonoBehaviour
     public GameObject lifeIconPrefab;
     public Transform lifePanel;
     public GameObject gameOverPanel;
-    public GameObject gameOverCanvas; // 유니티에서 할당
-    public TextMeshProUGUI gameOverText; // 점수, 시간 등 출력용 텍스트
+    public GameObject gameOverCanvas; 
+    
 
 
     private int score = 0;
@@ -37,9 +37,7 @@ public class GameUIManager : MonoBehaviour
     }
     public void Start()
     {
-        if (scoreText == null) Debug.LogWarning("ScoreText가 연결되지 않았습니다.");
-        if (lifeIconPrefab == null) Debug.LogWarning("lifeIconPrefab이 연결되지 않았습니다.");
-        if (lifePanel == null) Debug.LogWarning("lifePanel이 연결되지 않았습니다.");
+        
 
         UpdateScore(score);
         SetLife(life);
@@ -149,10 +147,7 @@ public class GameUIManager : MonoBehaviour
             gameOverCanvas.SetActive(true);
         }
 
-        if (gameOverText != null)
-        {
-            gameOverText.text = $"점수: {finalScore}\n생존 시간: {finalPlayTime:F1}초";
-        }
+        
     }
 
     public void RestartGame()
