@@ -105,7 +105,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.5}
+  m_Size: {x: 1.8, y: 1.3}
   m_EdgeRadius: 0
 --- !u!114 &6433931312822804007
 MonoBehaviour:
@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 917d40a9dab206a4cb47dfb5e81eeea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpforce: 4
-  moveSpeed: 2
-  slideTime: 1
+  jumpforce: 10
+  moveSpeed: 0
+  slideTime: 1.75
   maxHealth: 9
   isHurt: 0
   godMode: 0
@@ -219,7 +219,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 555
   m_Sprite: {fileID: -926048052, guid: 18e6d971025d9054d8abb92dac9d0c13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
