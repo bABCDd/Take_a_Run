@@ -807,11 +807,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2232893037882437385, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.62
+      value: 1.63
       objectReference: {fileID: 0}
     - target: {fileID: 2232893037882437385, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.62
+      value: 1.64
       objectReference: {fileID: 0}
     - target: {fileID: 2232893037882437385, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1154,11 +1154,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 711192252648313251, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 711192252648313251, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_margin.z
-      value: -72.155304
+      value: -93.37753
       objectReference: {fileID: 0}
     - target: {fileID: 711192252648313251, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_fontColor.b
@@ -1174,7 +1174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 711192252648313251, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_fontSizeBase
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1785992366701884259, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_Pivot.x
@@ -1274,7 +1274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6147646697930200643, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6147646697930200643, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_fontColor.b
@@ -1290,7 +1290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6147646697930200643, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_fontSizeBase
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6261137693827224889, guid: 12c1a903af11d4a4f8e506c253f54ed1, type: 3}
       propertyPath: m_SizeDelta.x
