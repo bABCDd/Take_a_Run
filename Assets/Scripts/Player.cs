@@ -64,21 +64,21 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isHurt)
-            return;
-        else
+        
+        if (isGrounded)
+         {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            isJump = true;
+         }
+        
+        if (!isHurt)
         {
-            if (isGrounded)
+            if (!isSliding && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)))
             {
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                    isJump = true;
+                StartCoroutine(DoSlide());
             }
         }
-
-        if(!isSliding && (Input.GetKeyDown(KeyCode.LeftShift)  || Input.GetMouseButtonDown(1)))
-        {
-            StartCoroutine(DoSlide());
-        }
+        
     }
 
     private void FixedUpdate()
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
             Heal(1);
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("TakeDamgeItem"))
+        else if (collision.gameObject.CompareTag("TakeDamageItem"))
         {
             TakeDamage(1);
             Destroy(collision.gameObject);
@@ -142,6 +142,11 @@ public class Player : MonoBehaviour
         lastHurtTime = Time.time;
         currentHealth -= damage;
         isHurt = true;
+        if(isSliding)
+        {
+            StopCoroutine(DoSlide());
+            EndSlide();
+        }
         animator.SetTrigger("Hurt");
 
         Debug.Log("HP:" + currentHealth);

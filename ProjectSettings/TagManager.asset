@@ -9,6 +9,7 @@ TagManager:
   - HealItem
   - TakeDamgeItem
   - Ground
+  - TakeDamageItem
   layers:
   - Default
   - TransparentFX
