@@ -140,7 +140,6 @@ Project/
 │   │   ├── Player.prefab
 │   │   ├── Obstacles/
 │   │   ├── Items/
-│   │   └── Effects/
 │   ├── Scenes/                   # 게임 씬 파일 (MainGameScene, TitleScene 등)
 │   ├── Scripts/                  # 모든 C# 스크립트
 │   │   ├── Managers/             # GameManager, LevelManager 등 게임 관리 스크립트
