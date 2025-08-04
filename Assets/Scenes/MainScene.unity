@@ -811,7 +811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2232893037882437385, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.6
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 2232893037882437385, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -902,6 +902,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6317390563165362276, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317390563165362276, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
@@ -934,11 +938,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
---- !u!1 &1490782978 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1582623430326935741, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
-  m_PrefabInstance: {fileID: 1490782977}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1525607160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,6 +1316,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d61a9ef5f297d4fbebe323bcbabfea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2075757345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1637100655549789684, guid: b4dd0fcba6789cb40aec1f13a177dfac, type: 3}
+  m_PrefabInstance: {fileID: 1490782977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2719181622640228728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1372,7 +1376,7 @@ PrefabInstance:
     - target: {fileID: 6742051362074347235, guid: c66ab9602c9d778448e98fc2a4ea94f8, type: 3}
       propertyPath: gameOverPanel
       value: 
-      objectReference: {fileID: 1490782978}
+      objectReference: {fileID: 2075757345}
     - target: {fileID: 8384908164897591264, guid: c66ab9602c9d778448e98fc2a4ea94f8, type: 3}
       propertyPath: m_Name
       value: GameManager
