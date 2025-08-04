@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     BoxCollider2D _collider;
 
     public float jumpforce = 4f;
-    public float moveSpeed = 0f;
+    public float moveSpeed = 2f;
     //슬라이딩 지속 시간
     public float slideTime = 1f;
     //체력 설정
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         //점프의 힘만큼 점프시킴
         if (isJump)
         {
-            velocity.y = jumpforce;
+            velocity.y += jumpforce;
             isJump = false;
         }
 
